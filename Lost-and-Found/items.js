@@ -84,7 +84,7 @@ async function fileMarkup(i, className="item-image"){
 
 async function card(i, manage=false){
   const media = await fileMarkup(i);
-  return `<article class="item-card">${media}<div class="item-body"><div class="item-meta"><span>${esc(fmt(i.date))}</span><span>•</span><span>${esc(i.place)}</span></div><h3>${esc(i.name)}</h3><p>${esc(i.description)}</p><div class="card-bottom"><span class="status ${i.status}">${esc(i.status)}</span><a href="item-details.html?id=${encodeURIComponent(i.id)}">View details →</a></div>${manage?`<div class="manage-actions"><button data-action="edit" data-id="${i.id}">Edit</button><button data-action="delete" data-id="${i.id}">Delete</button><button data-action="recover" data-id="${i.id}">${i.status==="recovered"?"Recovered":"Mark recovered"}</button></div>`:""}</div></article>`;
+  return `<article class="item-card">${media}<div class="item-body"><div class="item-meta"><span>${esc(fmt(i.date))}</span><span>•</span><span>${esc(i.place)}</span></div><h3>${esc(i.name)}</h3><p>${esc(i.description)}</p><div class="card-bottom"><span class="status ${i.status}">${esc(i.status)}</span><a href="item-details.html?id=${encodeURIComponent(i.id)}">View details →</a></div>${manage?`<div class="manage-actions"><button data-action="edit" data-id="${i.id}">Edit</button><button data-action="delete" data-id="${i.id}">Delete</button><button data-action="recover" data-id="${i.id}">${i.status==="recovered"?"Reopen report":"Mark recovered"}</button></div>`:""}</div></article>`;
 }
 
 async function renderList(list,el){
@@ -99,24 +99,47 @@ function initItems(){
   const search=document.getElementById("searchInput"),filter=document.getElementById("typeFilter"),count=document.getElementById("itemsCount");
   const run=async()=>{
     const q=search.value.toLowerCase().trim(),t=filter.value;
-    const list=getItems().filter(i=>(t==="all"||i.type===t)&&(!q||`${i.name} ${i.description} ${i.place}`.toLowerCase().includes(q)));
+    const terms=q ? q.split(/\s+/).filter(Boolean) : [];
+    const list=getItems().filter(i=>{
+      const matchesType = t==="all" || i.type===t;
+      if(!matchesType) return false;
+      if(!terms.length) return true;
+      const haystack = `${i.name || ""} ${i.description || ""} ${i.place || ""}`.toLowerCase();
+      return terms.every(term => haystack.includes(term));
+    });
     count.textContent=`${list.length} report${list.length!==1?"s":""}`;
     await renderList(list,grid);
   };
   search.addEventListener("input",run);filter.addEventListener("change",run);
-  document.getElementById("clearFilters").addEventListener("click",()=>{search.value="";filter.value="all";run()});
+  const clearBtn=document.getElementById("clearFilters");
+  if(clearBtn) clearBtn.addEventListener("click",()=>{search.value="";filter.value="all";run()});
   run();
 }
 
 function initReport(){
-  if(!requireUser())return;
   const form=document.getElementById("reportForm");if(!form)return;
+  if(!requireUser())return;
   const params=new URLSearchParams(location.search),editId=params.get("edit"),existing=editId?getItems().find(x=>x.id===editId&&x.reportedBy===user().email):null,type=(existing?existing.type:params.get("type")==="found"?"found":"lost");
   if(editId&&!existing){location.href="my-reports.html";return;}
   document.getElementById("reportTitle").textContent=existing?`Edit your ${type} report`:`Report a ${type} item`;
   document.getElementById("reportEyebrow").textContent=existing?"EDIT REPORT":type==="lost"?"REPORT LOST ITEM":"REPORT FOUND ITEM";
+
+  const nameInput=document.getElementById("itemName");
+  const dateInput=document.getElementById("itemDate");
+  const placeInput=document.getElementById("itemPlace");
+  const descInput=document.getElementById("itemDescription");
+  const contactInput=document.getElementById("itemContact");
+
+  if(dateInput){
+    dateInput.max = new Date().toISOString().split("T")[0];
+  }
+
   if(existing){
-    itemName.value=existing.name;itemDate.value=existing.date;itemPlace.value=existing.place;itemDescription.value=existing.description;itemContact.value=existing.contact;
+    if(nameInput) nameInput.value=existing.name;
+    if(dateInput) dateInput.value=existing.date;
+    if(placeInput) placeInput.value=existing.place;
+    if(descInput) descInput.value=existing.description;
+    if(contactInput) contactInput.value=existing.contact;
     document.getElementById("imagePreview").innerHTML=existing.fileName?`<span class="upload-icon">📎</span><strong>${esc(existing.fileName)}</strong><small>Current attachment · choose a new file to replace it</small>`:existing.image?`<img src="${existing.image}" alt="Current image">`:document.getElementById("imagePreview").innerHTML;
   }
 
@@ -139,7 +162,13 @@ function initReport(){
     e.preventDefault();
     const msg=document.getElementById("reportMessage"),button=form.querySelector('button[type="submit"]'),file=input.files[0];
     msg.textContent="";
-    if(!itemName.value.trim()||!itemDescription.value.trim()||!itemDate.value||!itemPlace.value.trim()||!itemContact.value.trim()){
+    const nameVal=nameInput?nameInput.value.trim():"";
+    const descVal=descInput?descInput.value.trim():"";
+    const dateVal=dateInput?dateInput.value:"";
+    const placeVal=placeInput?placeInput.value.trim():"";
+    const contactVal=contactInput?contactInput.value.trim():"";
+
+    if(!nameVal||!descVal||!dateVal||!placeVal||!contactVal){
       msg.textContent="Please complete all required fields.";return;
     }
     if(file&&file.size>MAX_FILE_SIZE){msg.textContent="File is too large. Maximum size is 10 MB.";return;}
@@ -152,7 +181,7 @@ function initReport(){
         await saveFile(fileId,file);
         fileName=file.name;fileType=file.type;fileSize=file.size;
       }
-      const item={id,type,name:itemName.value.trim(),description:itemDescription.value.trim(),date:itemDate.value,place:itemPlace.value.trim(),contact:itemContact.value.trim(),fileId,fileName,fileType,fileSize,image:existing?.image||"",reportedBy:user().email,reporterName:user().name,status:existing?.status||"active",createdAt:existing?.createdAt||Date.now()};
+      const item={id,type,name:nameVal,description:descVal,date:dateVal,place:placeVal,contact:contactVal,fileId,fileName,fileType,fileSize,image:existing?.image||"",reportedBy:user().email,reporterName:user().name,status:existing?.status||"active",createdAt:existing?.createdAt||Date.now()};
       const items=getItems();
       if(existing){
         const idx=items.findIndex(x=>x.id===existing.id);
@@ -181,7 +210,21 @@ async function initDetails(){
   }else if(i.image) photo=`<img src="${i.image}" alt="${esc(i.name)}">`;
   box.innerHTML=`<div class="detail-grid"><div class="detail-photo">${photo}</div><div class="detail-info"><div class="detail-top"><span class="pill ${i.type}">${i.type.toUpperCase()}</span><span class="status ${i.status}">${i.status}</span></div><h1>${esc(i.name)}</h1><p class="detail-description">${esc(i.description)}</p><div class="detail-facts"><div><small>DATE</small><strong>${esc(fmt(i.date))}</strong></div><div><small>PLACE</small><strong>${esc(i.place)}</strong></div><div><small>REPORTED BY</small><strong>${esc(i.reporterName)}</strong></div></div><div class="contact-box"><div><small>CONTACT</small><strong>${esc(i.contact)}</strong></div><a class="btn btn-primary" href="mailto:${encodeURIComponent(i.contact)}?subject=Regarding your ${encodeURIComponent(i.name)} report">Contact reporter →</a></div>${i.status!=="recovered"&&i.reportedBy!==user()?.email?`<button id="claimBtn" class="btn btn-secondary full">Claim this item</button>`:""}<p id="claimMessage" class="form-message"></p></div></div>`;
   const cb=document.getElementById("claimBtn");
-  if(cb)cb.onclick=()=>{let claims=JSON.parse(localStorage.getItem("lf_claims")||"[]");if(claims.some(c=>c.itemId===i.id&&c.userEmail===user()?.email))return document.getElementById("claimMessage").textContent="You have already submitted a claim.";claims.push({itemId:i.id,userEmail:user().email,date:Date.now()});localStorage.setItem("lf_claims",JSON.stringify(claims));document.getElementById("claimMessage").textContent="Claim recorded locally. Contact the reporter to continue."};
+  if(cb)cb.onclick=()=>{
+    const claimMsg=document.getElementById("claimMessage");
+    if(!user()){
+      if(claimMsg) claimMsg.textContent="Please log in to submit a claim for this item.";
+      return;
+    }
+    let claims=JSON.parse(localStorage.getItem("lf_claims")||"[]");
+    if(claims.some(c=>c.itemId===i.id&&c.userEmail===user().email)){
+      if(claimMsg) claimMsg.textContent="You have already submitted a claim.";
+      return;
+    }
+    claims.push({itemId:i.id,userEmail:user().email,date:Date.now()});
+    localStorage.setItem("lf_claims",JSON.stringify(claims));
+    if(claimMsg) claimMsg.textContent="Claim recorded locally. Contact the reporter to continue.";
+  };
 }
 
 async function initMine(){
@@ -193,13 +236,18 @@ async function initMine(){
     const b=e.target.closest("button");if(!b)return;
     const id=b.dataset.id,items=getItems(),idx=items.findIndex(x=>x.id===id);if(idx<0)return;
     if(b.dataset.action==="delete"&&confirm("Delete this report?")){await deleteFile(items[idx].fileId);items.splice(idx,1);saveItems(items);initMine();}
-    if(b.dataset.action==="recover"){items[idx].status="recovered";saveItems(items);initMine();}
+    if(b.dataset.action==="recover"){
+      items[idx].status=items[idx].status==="recovered"?"active":"recovered";
+      saveItems(items);
+      initMine();
+    }
     if(b.dataset.action==="edit")location.href=`report.html?type=${items[idx].type}&edit=${encodeURIComponent(id)}`;
   };
 }
 
 async function initDashboard(){
   const total=document.getElementById("totalCount");if(!total)return;
+  if(!requireUser())return;
   const u=user(),x=getItems();
   total.textContent=x.length;
   document.getElementById("lostCount").textContent=x.filter(i=>i.type==="lost").length;

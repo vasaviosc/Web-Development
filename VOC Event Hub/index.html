@@ -1,152 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VOSC Event Hub</title>
-    <meta
-      name="description"
-      content="VOSC Event Hub brings developers, designers, and domain experts together for the Domain Discovery Workshop."
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="brand" href="#top">VOSC</a>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
-          Menu
-        </button>
-        <div class="nav-links" id="nav-links">
-          <a href="#schedul">Schedule</a>
-          <a href="#spekrs">Speakers</a>
-          <a href="#abut">About</a>
-          <a href="#faq">FAQ</a>
-          <a href="#register">Register</a>
-        </div>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOSC Event Hub | Domain Discovery Workshop 2026</title>
+  <meta name="description" content="Join builders, designers, and domain experts at VOSC Event Hub for the Domain Discovery Workshop 2026. Practical AI, product thinking, and hands-on prototyping.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Live Announcement Banner -->
+  <div class="announcement-banner">
+    <div class="container banner-inner">
+      <span class="banner-badge">LIVE UPDATE</span>
+      <p>⚡ Seats are filling quickly for this year's workshop. Early registration closing soon!</p>
+      <a href="#register" class="banner-link">Claim Your Seat →</a>
+    </div>
+  </div>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Domain Discovery Workshop</p>
-          <h1>Build solutions with real domain context.</h1>
-          <p class="lead">
-            Explore practical AI, data, and product thinking through live sessions,
-            small-group exercises, and community learning.
-          </p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#abut">Learn More</a>
-            <a class="secondary-btn" href="#register">Reserve Your Spot</a>
+  <header class="site-header" id="top">
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="VOSC Event Hub Home">
+        <span class="brand-gradient">VOSC</span>
+        <span class="brand-sub">Event Hub</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#schedule" class="nav-link">Schedule</a>
+        <a href="#speakers" class="nav-link">Speakers</a>
+        <a href="#highlights" class="nav-link">Highlights</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#register" class="nav-btn">Register Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="mobile-nav-backdrop" id="navBackdrop"></div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="badge-pill">
+          <span class="pulse-dot"></span>
+          <span>Domain Discovery Workshop · November 14-15, 2026</span>
+        </div>
+        <h1>Build solutions with <span>real domain context.</span></h1>
+        <p class="lead">
+          Explore practical AI, data engineering, and product thinking through live interactive sessions, small-group exercises, and collaborative community prototyping.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-btn" href="#register">
+            <span>Reserve Your Spot</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a class="secondary-btn" href="#about">
+            <span>Learn More</span>
+          </a>
+        </div>
+
+        <!-- Event Metrics Strip -->
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <strong>2 Days</strong>
+            <span>Intensive Labs</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <strong>12+</strong>
+            <span>Domain Mentors</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <strong>500+</strong>
+            <span>Builders Attending</span>
           </div>
         </div>
+      </div>
 
-        <div class="hero-visual">
+      <div class="hero-visual">
+        <div class="visual-card-wrapper">
           <img
             src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80"
-            alt=""
+            alt="Diverse team of engineers and designers collaborating at the Domain Discovery Workshop"
+            class="hero-img"
+            loading="eager"
           />
+          <div class="visual-floating-badge">
+            <span class="badge-icon">📍</span>
+            <div>
+              <strong>Hybrid Conference</strong>
+              <small>San Francisco &amp; Global Livestream</small>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="about" class="content-section">
-        <h2>About the event</h2>
-        <p>
-          VOSC Event Hub is a community-driven workshop designed to help teams connect
-          technical ideas with the people, problems, and processes they serve.
-        </p>
-        <p>
-          Participants learn to uncover meaningful opportunities, validate assumptions,
-          and turn domain insight into useful digital experiences.
-        </p>
-      </section>
-
-      <section id="schedule" class="content-section">
-        <h2>Schedule</h2>
-        <div class="schedule-grid">
-          <article class="schedule-card">
-            <span class="time">09:00</span>
-            <h3>Welcome and kickoff</h3>
-            <p>Set expectations and understand workshop goals.</p>
-          </article>
-          <article class="schedule-card">
-            <span class="time">10:30</span>
-            <h3>Domain mapping</h3>
-            <p>Break down real challenges into opportunities.</p>
-          </article>
-          <article class="schedule-card">
-            <span class="time">13:00</span>
-            <h3>Hands-on prototyping</h3>
-            <p>Turn ideas into experience sketches and working prototypes.</p>
-          </article>
+    <!-- Live Countdown Section -->
+    <section class="countdown-section">
+      <div class="countdown-container">
+        <div class="countdown-label">
+          <span class="eyebrow">EVENT STARTS IN</span>
+          <h3>Countdown to Kickoff</h3>
         </div>
-      </section>
+        <div class="countdown-grid" id="countdownGrid">
+          <div class="countdown-box"><strong id="days">38</strong><span>Days</span></div>
+          <div class="countdown-box"><strong id="hours">14</strong><span>Hours</span></div>
+          <div class="countdown-box"><strong id="minutes">22</strong><span>Minutes</span></div>
+          <div class="countdown-box"><strong id="seconds">45</strong><span>Seconds</span></div>
+        </div>
+      </div>
+    </section>
 
-      <section id="speakers" class="content-section">
-        <h2>Featured speakers</h2>
-        <div class="speaker-grid">
-          <article class="speaker-card">
+    <!-- About Section -->
+    <section id="about" class="content-section">
+      <div class="section-header">
+        <span class="eyebrow">ABOUT THE EVENT</span>
+        <h2>Bridging Technology with Human Context</h2>
+        <p class="section-sub">Why domain discovery is the missing link in modern software craftsmanship.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">🎯</div>
+          <h3>Uncover Real Needs</h3>
+          <p>Learn structured discovery techniques to peel back user requests and identify core operational pain points before writing a single line of code.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">⚡</div>
+          <h3>Practical AI Integration</h3>
+          <p>Move beyond toy LLM prompts into context-aware agents, domain knowledge graphs, and robust production-ready data pipelines.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🤝</div>
+          <h3>Cross-Disciplinary Teams</h3>
+          <p>Pair with domain practitioners, researchers, and engineers in sprint-style workshops that simulate real-world product incubation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="content-section">
+      <div class="section-header">
+        <span class="eyebrow">PROGRAM TIMELINE</span>
+        <h2>Workshop Schedule</h2>
+        <p class="section-sub">A curated two-day immersion packed with keynote insights and practical workshops.</p>
+      </div>
+
+      <!-- Track Filter Tabs -->
+      <div class="schedule-filter" role="tablist">
+        <button class="filter-tab active" data-track="all">All Sessions</button>
+        <button class="filter-tab" data-track="keynote">Keynotes</button>
+        <button class="filter-tab" data-track="deep-dive">Deep Dives</button>
+        <button class="filter-tab" data-track="hands-on">Hands-on Labs</button>
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid">
+        <article class="schedule-card" data-track="keynote">
+          <div class="card-meta">
+            <span class="time">09:00 - 10:15 AM</span>
+            <span class="track-tag keynote">Keynote</span>
+          </div>
+          <h3>Welcome &amp; Workshop Kickoff</h3>
+          <p>Setting expectations, understanding discovery frameworks, and establishing team mission statements for the weekend.</p>
+          <div class="speaker-tag">👤 Aisha Khan &amp; Daniel Ortiz</div>
+        </article>
+
+        <article class="schedule-card" data-track="deep-dive">
+          <div class="card-meta">
+            <span class="time">10:30 - 12:30 PM</span>
+            <span class="track-tag deep-dive">Deep Dive</span>
+          </div>
+          <h3>Domain Mapping &amp; Ontology Construction</h3>
+          <p>Break down complex industrial challenges into actionable software domains, entity relationships, and bound contexts.</p>
+          <div class="speaker-tag">👤 Priya Nair</div>
+        </article>
+
+        <article class="schedule-card" data-track="hands-on">
+          <div class="card-meta">
+            <span class="time">01:30 - 04:00 PM</span>
+            <span class="track-tag hands-on">Hands-on Lab</span>
+          </div>
+          <h3>Interactive Prototyping &amp; Agent Workflows</h3>
+          <p>Turn domain insight into functioning experience sketches and autonomous agent prototypes using modern toolchains.</p>
+          <div class="speaker-tag">👤 Daniel Ortiz &amp; Aisha Khan</div>
+        </article>
+
+        <article class="schedule-card" data-track="hands-on">
+          <div class="card-meta">
+            <span class="time">04:15 - 05:30 PM</span>
+            <span class="track-tag hands-on">Showcase</span>
+          </div>
+          <h3>Demo Day &amp; Community Feedback</h3>
+          <p>Teams present live builds to domain experts for critique, architecture review, and community recognition.</p>
+          <div class="speaker-tag">👤 All Mentors</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="content-section">
+      <div class="section-header">
+        <span class="eyebrow">INDUSTRY LEADERS</span>
+        <h2>Featured Speakers &amp; Mentors</h2>
+        <p class="section-sub">Learn directly from veteran architects, product strategists, and researchers.</p>
+      </div>
+
+      <div class="speaker-grid">
+        <article class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Aisha Khan">
+          </div>
+          <div class="speaker-info">
             <h3>Aisha Khan</h3>
-            <p>Product strategist</p>
-          </article>
-          <article class="speaker-card">
+            <span class="speaker-role">Product Strategy Director</span>
+            <p>12+ years leading context-driven product architecture and user experience transformation across enterprise scale.</p>
+            <div class="speaker-topics">
+              <span>Domain Strategy</span>
+              <span>Product Ops</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Daniel Ortiz">
+          </div>
+          <div class="speaker-info">
             <h3>Daniel Ortiz</h3>
-            <p>AI engineering lead</p>
-          </article>
-          <article class="speaker-card">
+            <span class="speaker-role">AI Engineering Lead</span>
+            <p>Specializes in neuro-symbolic AI architectures, agentic evaluation pipelines, and high-throughput vector reasoning.</p>
+            <div class="speaker-topics">
+              <span>Agentic AI</span>
+              <span>LLM Systems</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Priya Nair">
+          </div>
+          <div class="speaker-info">
             <h3>Priya Nair</h3>
-            <p>UX researcher</p>
-          </article>
-        </div>
-      </section>
+            <span class="speaker-role">Principal UX Researcher</span>
+            <p>Pioneering ethnography methodologies for developer tool interfaces, complex workflows, and cognitive load reduction.</p>
+            <div class="speaker-topics">
+              <span>UX Research</span>
+              <span>Cognitive Design</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section id="faq" class="content-section">
-        <h2>Frequently asked questions</h2>
-        <div class="faq-list">
-          <div class="faq-item active">
-            <div class="faq-question">Who should attend?</div>
-            <div class="faq-answer">This workshop is open to builders, researchers, designers, and curious learners across all experience levels.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Do I need to bring my own laptop?</div>
-            <div class="faq-answer">Yes, a laptop is recommended so you can take part in the activities and prototyping sessions.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Is the event free?</div>
-            <div class="faq-answer">Yes, the workshop is free to attend for registered participants.</div>
+    <!-- Highlights Section -->
+    <section id="highlights" class="content-section">
+      <div class="section-header">
+        <span class="eyebrow">WHAT TO EXPECT</span>
+        <h2>Workshop Highlights</h2>
+        <p class="section-sub">Included with every registered in-person and virtual pass.</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-item">
+          <span class="highlight-icon">💻</span>
+          <h4>Live Prototyping Sandboxes</h4>
+          <p>Instant cloud sandbox environments with pre-loaded datasets and agent frameworks.</p>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">📜</span>
+          <h4>Verified Certificate</h4>
+          <p>Official Certificate of Completion recognizing your domain discovery and prototyping competencies.</p>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">🌐</span>
+          <h4>Community Alumni Network</h4>
+          <p>Year-round access to private Discord channels, mentorship office hours, and project showcases.</p>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">☕</span>
+          <h4>Catering &amp; Swag Kit</h4>
+          <p>Locally roasted coffee, catered meals, and limited-edition workshop mechanical keyboards &amp; hoodies.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="content-section">
+      <div class="section-header">
+        <span class="eyebrow">GOT QUESTIONS?</span>
+        <h2>Frequently Asked Questions</h2>
+        <p class="section-sub">Everything you need to know about attendance, logistics, and prerequisites.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question" aria-expanded="true" aria-controls="faq-ans-1" id="faq-q-1">
+            <span>Who should attend this workshop?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-ans-1" role="region" aria-labelledby="faq-q-1">
+            <p>This workshop is designed for software engineers, product designers, UX researchers, product managers, and technical founders across all experience levels who want to build software with deep domain fidelity.</p>
           </div>
         </div>
-      </section>
 
-      <section id="register" class="content-section registration-wrap">
-        <h4>Reserve your seat</h4>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2" id="faq-q-2">
+            <span>Do I need to bring my own laptop?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-ans-2" role="region" aria-labelledby="faq-q-2" hidden>
+            <p>Yes, a laptop with a modern web browser and your preferred code editor is recommended so you can participate directly in interactive labs and prototyping challenges.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3" id="faq-q-3">
+            <span>Is the workshop free of charge?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-ans-3" role="region" aria-labelledby="faq-q-3" hidden>
+            <p>Yes! Thanks to community sponsors, participation is 100% free for all registered and verified attendees.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-4" id="faq-q-4">
+            <span>Can I join virtually if I am not in San Francisco?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-ans-4" role="region" aria-labelledby="faq-q-4" hidden>
+            <p>Absolutely. We offer a dedicated high-definition interactive livestream and virtual breakout rooms for global participants.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="content-section registration-wrap">
+      <div class="section-header">
+        <span class="eyebrow">LIMITED CAPACITY</span>
+        <h2 class="section-title">Reserve your seat</h2>
+        <p class="section-sub">Join over 500+ builders. Instant confirmation pass generated upon submission.</p>
+      </div>
+
+      <div class="registration-container" id="registrationContainer">
         <form id="register-form" class="register-form" novalidate>
-          <label for="name">Full name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input id="name" name="name" type="text" placeholder="Sarah Miller" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Work / School Email *</label>
+              <input id="email" name="email" type="email" placeholder="sarah@company.com" required autocomplete="email" />
+            </div>
+          </div>
 
-          <label for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="role">Primary Role *</label>
+              <select id="role" name="role" required>
+                <option value="">Select your role</option>
+                <option value="developer">Software Engineer / Developer</option>
+                <option value="designer">Product / UX Designer</option>
+                <option value="researcher">Researcher / Data Scientist</option>
+                <option value="pm">Product Manager / Founder</option>
+                <option value="student">Student / Academic</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="attendance">Attendance Mode *</label>
+              <select id="attendance" name="attendance" required>
+                <option value="in-person">In-Person (San Francisco)</option>
+                <option value="virtual">Virtual Interactive Livestream</option>
+              </select>
+            </div>
+          </div>
 
-          <label for="role">Role</label>
-          <select id="role" name="role">
-            <option value="">Select a role</option>
-            <option value="designer">Designer</option>
-            <option value="developer">Developer</option>
-            <option value="researcher">Researcher</option>
-            <option value="student">Student</option>
-          </select>
+          <div class="form-group">
+            <label for="goal">What do you hope to learn or build? (Optional)</label>
+            <input id="goal" name="goal" type="text" placeholder="e.g. AI workflows for medical diagnostics" />
+          </div>
 
-          <button type="submit" class="primary-btn">Register now</button>
+          <div id="registerError" class="register-error" role="alert"></div>
+
+          <button type="submit" class="primary-btn full-btn" id="submitRegBtn">
+            <span>Confirm Free Registration</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </button>
+          
+          <p class="form-privacy-note">🔒 We respect your privacy. No spam, strictly event logistics.</p>
         </form>
-      </section>
-    </main>
 
-    <div class="site-footer">
-      <p>© 2026 VOSC Event Hub</p>
-      <a href="#top">Back to top</a>
+        <!-- Dynamic Ticket Card (Shown after registration) -->
+        <div id="ticketConfirmation" class="ticket-confirmation" hidden>
+          <div class="ticket-card">
+            <div class="ticket-header">
+              <span class="ticket-badge">OFFICIAL WORKSHOP PASS</span>
+              <span class="ticket-id" id="ticketIdDisplay">#VOSC-2026-0481</span>
+            </div>
+            <div class="ticket-body">
+              <h3 id="ticketNameDisplay">Sarah Miller</h3>
+              <p id="ticketEmailDisplay">sarah@company.com</p>
+              <div class="ticket-details-grid">
+                <div>
+                  <small>ROLE</small>
+                  <strong id="ticketRoleDisplay">Developer</strong>
+                </div>
+                <div>
+                  <small>MODE</small>
+                  <strong id="ticketModeDisplay">In-Person</strong>
+                </div>
+                <div>
+                  <small>DATE</small>
+                  <strong>Nov 14-15, 2026</strong>
+                </div>
+                <div>
+                  <small>LOCATION</small>
+                  <strong>San Francisco &amp; Online</strong>
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="qr-mock">
+                <span>██ ▄▄▄▄▄ ██ ▄ █</span>
+                <span>██ █   █ ██ █ █</span>
+                <span>██ ▀▀▀▀▀ ██ ▀▀█</span>
+              </div>
+              <div class="ticket-actions">
+                <button class="primary-btn btn-sm" id="printTicketBtn">🖨️ Print Pass</button>
+                <button class="secondary-btn btn-sm" id="newRegBtn">Register Another</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span class="brand-gradient">VOSC</span> Event Hub
+        <p>Connecting domain context with modern software innovation.</p>
+      </div>
+      <div class="footer-meta">
+        <p>© 2026 VOSC Event Hub. All rights reserved.</p>
+        <a href="#top" class="back-to-top">Back to top ↑</a>
+      </div>
     </div>
+  </footer>
 
-    <script src="js/script.js"></script>
-  </body>
+  <!-- Toast Notification -->
+  <div id="vocToast" class="voc-toast" role="status" aria-live="polite"></div>
+
+  <script src="js/script.js"></script>
+</body>
 </html>

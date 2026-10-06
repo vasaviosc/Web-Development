@@ -1,152 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VOSC Event Hub</title>
-    <meta
-      name="description"
-      content="VOSC Event Hub brings developers, designers, and domain experts together for the Domain Discovery Workshop."
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="brand" href="#top">VOSC</a>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
-          Menu
-        </button>
-        <div class="nav-links" id="nav-links">
-          <a href="#schedul">Schedule</a>
-          <a href="#spekrs">Speakers</a>
-          <a href="#abut">About</a>
-          <a href="#faq">FAQ</a>
-          <a href="#register">Register</a>
-        </div>
-      </nav>
-    </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Domain Discovery Workshop</p>
-          <h1>Build solutions with real domain context.</h1>
-          <p class="lead">
-            Explore practical AI, data, and product thinking through live sessions,
-            small-group exercises, and community learning.
-          </p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#abut">Learn More</a>
-            <a class="secondary-btn" href="#register">Reserve Your Spot</a>
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VOSC Event Hub</title>
+  <meta name="description"
+    content="VOSC Event Hub brings developers, designers, and domain experts together for the Domain Discovery Workshop." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-        <div class="hero-visual">
-          <img
-            src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80"
-            alt=""
-          />
-        </div>
-      </section>
+<body>
+  <header class="site-header">
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="brand" href="#top">VOSC</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
+        Menu
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#schedule">Schedule</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#register" class="nav-register">Register</a>
+      </div>
+    </nav>
+  </header>
 
-      <section id="about" class="content-section">
-        <h2>About the event</h2>
-        <p>
-          VOSC Event Hub is a community-driven workshop designed to help teams connect
-          technical ideas with the people, problems, and processes they serve.
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Domain Discovery Workshop</p>
+        <h1>Build solutions with real domain context.</h1>
+        <p class="lead">
+          Explore practical AI, data, and product thinking through live sessions,
+          small-group exercises, and community learning.
         </p>
-        <p>
-          Participants learn to uncover meaningful opportunities, validate assumptions,
-          and turn domain insight into useful digital experiences.
-        </p>
-      </section>
-
-      <section id="schedule" class="content-section">
-        <h2>Schedule</h2>
-        <div class="schedule-grid">
-          <article class="schedule-card">
-            <span class="time">09:00</span>
-            <h3>Welcome and kickoff</h3>
-            <p>Set expectations and understand workshop goals.</p>
-          </article>
-          <article class="schedule-card">
-            <span class="time">10:30</span>
-            <h3>Domain mapping</h3>
-            <p>Break down real challenges into opportunities.</p>
-          </article>
-          <article class="schedule-card">
-            <span class="time">13:00</span>
-            <h3>Hands-on prototyping</h3>
-            <p>Turn ideas into experience sketches and working prototypes.</p>
-          </article>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#about">Learn More</a>
+          <a class="secondary-btn" href="#register">Reserve Your Spot</a>
         </div>
-      </section>
 
-      <section id="speakers" class="content-section">
-        <h2>Featured speakers</h2>
-        <div class="speaker-grid">
-          <article class="speaker-card">
-            <h3>Aisha Khan</h3>
-            <p>Product strategist</p>
-          </article>
-          <article class="speaker-card">
-            <h3>Daniel Ortiz</h3>
-            <p>AI engineering lead</p>
-          </article>
-          <article class="speaker-card">
-            <h3>Priya Nair</h3>
-            <p>UX researcher</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="faq" class="content-section">
-        <h2>Frequently asked questions</h2>
-        <div class="faq-list">
-          <div class="faq-item active">
-            <div class="faq-question">Who should attend?</div>
-            <div class="faq-answer">This workshop is open to builders, researchers, designers, and curious learners across all experience levels.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Do I need to bring my own laptop?</div>
-            <div class="faq-answer">Yes, a laptop is recommended so you can take part in the activities and prototyping sessions.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Is the event free?</div>
-            <div class="faq-answer">Yes, the workshop is free to attend for registered participants.</div>
+        <div class="countdown-container" id="countdown">
+          <p class="countdown-label">Event starts in</p>
+          <div class="countdown-grid">
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-days">00</span>
+              <span class="countdown-text">Days</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-hours">00</span>
+              <span class="countdown-text">Hours</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-minutes">00</span>
+              <span class="countdown-text">Minutes</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-seconds">00</span>
+              <span class="countdown-text">Seconds</span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="register" class="content-section registration-wrap">
-        <h4>Reserve your seat</h4>
-        <form id="register-form" class="register-form" novalidate>
-          <label for="name">Full name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required />
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80"
+          alt="" />
+      </div>
+    </section>
 
-          <label for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+    <section id="about" class="content-section">
+      <h2>About the event</h2>
+      <p>
+        VOSC Event Hub is a community-driven workshop designed to help teams connect
+        technical ideas with the people, problems, and processes they serve.
+      </p>
+      <p>
+        Participants learn to uncover meaningful opportunities, validate assumptions,
+        and turn domain insight into useful digital experiences.
+      </p>
+    </section>
 
-          <label for="role">Role</label>
-          <select id="role" name="role">
-            <option value="">Select a role</option>
-            <option value="designer">Designer</option>
-            <option value="developer">Developer</option>
-            <option value="researcher">Researcher</option>
-            <option value="student">Student</option>
-          </select>
+    <section id="schedule" class="content-section">
+      <h2>Schedule</h2>
+      <div class="schedule-grid">
+        <article class="schedule-card">
+          <span class="time">09:00</span>
+          <h3>Welcome and kickoff</h3>
+          <p>Set expectations and understand workshop goals.</p>
+        </article>
+        <article class="schedule-card">
+          <span class="time">10:30</span>
+          <h3>Domain mapping</h3>
+          <p>Break down real challenges into opportunities.</p>
+        </article>
+        <article class="schedule-card">
+          <span class="time">13:00</span>
+          <h3>Hands-on prototyping</h3>
+          <p>Turn ideas into experience sketches and working prototypes.</p>
+        </article>
+      </div>
+    </section>
 
-          <button type="submit" class="primary-btn">Register now</button>
-        </form>
-      </section>
-    </main>
+    <section id="speakers" class="content-section">
+      <h2>Featured speakers</h2>
+      <div class="speaker-grid">
+        <article class="speaker-card">
+          <h3>Aisha Khan</h3>
+          <p>Product strategist</p>
+        </article>
+        <article class="speaker-card">
+          <h3>Daniel Ortiz</h3>
+          <p>AI engineering lead</p>
+        </article>
+        <article class="speaker-card">
+          <h3>Priya Nair</h3>
+          <p>UX researcher</p>
+        </article>
+      </div>
+    </section>
 
-    <div class="site-footer">
-      <p>© 2026 VOSC Event Hub</p>
-      <a href="#top">Back to top</a>
-    </div>
+    <section id="faq" class="content-section">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-list">
+        <div class="faq-item active">
+          <div class="faq-question">Who should attend?</div>
+          <div class="faq-answer">This workshop is open to builders, researchers, designers, and curious learners across
+            all experience levels.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Do I need to bring my own laptop?</div>
+          <div class="faq-answer">Yes, a laptop is recommended so you can take part in the activities and prototyping
+            sessions.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Is the event free?</div>
+          <div class="faq-answer">Yes, the workshop is free to attend for registered participants.</div>
+        </div>
+      </div>
+    </section>
 
-    <script src="js/script.js"></script>
-  </body>
+    <section id="register" class="content-section registration-wrap">
+      <h4>Reserve your seat</h4>
+      <form id="register-form" class="register-form" novalidate>
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required />
+
+        <label for="email">Work email</label>
+        <input id="email" name="email" type="email" placeholder="name@company.com" required />
+
+        <label for="phone">Phone number</label>
+        <input id="phone" name="phone" type="tel" placeholder="Enter your 10-digit mobile number" required />
+
+        <label for="role">Role</label>
+        <select id="role" name="role">
+          <option value="">Select a role</option>
+          <option value="designer">Designer</option>
+          <option value="developer">Developer</option>
+          <option value="researcher">Researcher</option>
+          <option value="student">Student</option>
+        </select>
+
+        <button type="submit" class="primary-btn">Register now</button>
+      </form>
+      <div id="registration-confirmation" class="registration-confirmation" hidden></div>
+    </section>
+  </main>
+
+  <div class="site-footer">
+    <p>© 2026 VOSC Event Hub</p>
+    <a href="#top">Back to top</a>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
 </html>

@@ -73,10 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const errEl = document.getElementById("registerError");
       if (errEl) { errEl.textContent = ""; errEl.classList.remove("show"); }
+      const phoneEl = document.getElementById("registerPhone");
       const nameEl = document.getElementById("registerName");
       const emailEl = document.getElementById("registerEmail");
       const passEl = document.getElementById("registerPassword");
-      if (!nameEl || !emailEl || !passEl) return;
+      const phone = phoneEl.value.trim();
+      if (!/^[0-9]{10}$/.test(phone)) {
+          return showError("registerError", "Phone number must contain exactly 10 digits.");
+      }
+      if (!nameEl || !emailEl || !passEl || !phone) return;
       const name = nameEl.value.trim();
       const email = emailEl.value.trim().toLowerCase();
       const password = passEl.value;
@@ -93,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         id: (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : ("u_" + Date.now() + "_" + Math.random().toString(36).slice(2)),
         name,
         email,
+        phone,
         password,
       };
       const users = getUsers();

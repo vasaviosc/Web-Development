@@ -1,5 +1,30 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Browse reports | Lost & Found+</title><link rel="stylesheet" href="style.css"></head>
 <body class="app-page"><header class="site-header"><div class="container nav"><a class="brand" href="dashboard.html"><span class="brand-mark">+</span>Lost & Found<span class="brand-plus">+</span></a><nav><a class="active" href="items.html">Browse</a><a href="my-reports.html">My reports</a><a href="dashboard.html">Dashboard</a></nav></div></header>
-<main class="container app-main"><div class="page-heading"><div><span class="eyebrow">COMMUNITY REPORTS</span><h1>Find an item</h1><p class="muted">Search through lost and found reports.</p></div><a href="report.html?type=lost" class="btn btn-primary">+ Report item</a></div>
-<div class="search-panel"><div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Search by item, description or place..."></div><select id="typeFilter"><option value="all">All reports</option><option value="lost">Lost items</option><option value="found">Found items</option></select><button id="clearFilters" class="btn btn-secondary">Clear</button></div>
-<div id="itemsCount" class="results-count"></div><div id="itemsGrid" class="item-grid"></div></main><script src="items.js"></script></body></html>
+<main class="container app-main"><div class="page-heading"><div><span class="eyebrow">COMMUNITY REPORTS</span><h1>Find an item</h1><p class="muted">Search through lost and found reports using keywords and filters.</p></div><a href="report.html?type=lost" class="btn btn-primary">+ Report item</a></div>
+<div class="search-panel search-panel-extended">
+  <div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Search by item name, details, place..."></div>
+  <select id="typeFilter">
+    <option value="all">All types</option>
+    <option value="lost">Lost items</option>
+    <option value="found">Found items</option>
+  </select>
+  <select id="categoryFilter">
+    <option value="all">All categories</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Wallets & Cards">Wallets & Cards</option>
+    <option value="Keys">Keys</option>
+    <option value="Documents & IDs">Documents & IDs</option>
+    <option value="Bags & Backpacks">Bags & Backpacks</option>
+    <option value="Jewelry & Accessories">Jewelry & Accessories</option>
+    <option value="Clothing">Clothing</option>
+    <option value="Pets">Pets</option>
+    <option value="Other">Other</option>
+  </select>
+  <select id="statusFilter">
+    <option value="all">All statuses</option>
+    <option value="active" selected>Active only</option>
+    <option value="claimed">Claimed / Recovered</option>
+  </select>
+  <button id="clearFilters" class="btn btn-secondary">Clear</button>
+</div>
+<div id="itemsCount" class="results-count"></div><div id="itemsGrid" class="item-grid"></div></main><script src="auth.js?v=3"></script><script src="items.js?v=3"></script></body></html>

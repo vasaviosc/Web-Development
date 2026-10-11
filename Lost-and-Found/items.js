@@ -93,20 +93,75 @@ async function renderList(list,el){
   el.innerHTML = (await Promise.all(list.map(i=>card(i)))).join("");
 }
 
-function initItems(){
-  const grid=document.getElementById("itemsGrid");
-  if(!grid)return;
-  const search=document.getElementById("searchInput"),filter=document.getElementById("typeFilter"),count=document.getElementById("itemsCount");
-  const run=async()=>{
-    const q=search.value.toLowerCase().trim(),t=filter.value;
-    const list=getItems().filter(i=>(t==="all"||i.type===t)&&(!q||`${i.name} ${i.description} ${i.place}`.toLowerCase().includes(q)));
-    count.textContent=`${list.length} report${list.length!==1?"s":""}`;
-    await renderList(list,grid);
+function initItems() {
+  const grid = document.getElementById("itemsGrid");
+  if (!grid) return;
+
+  const search = document.getElementById("searchInput");
+  const filter = document.getElementById("typeFilter");
+  const sort = document.getElementById("sortFilter");
+  const count = document.getElementById("itemsCount");
+  const clear = document.getElementById("clearFilters");
+
+  const run = async () => {
+    const query = search.value.toLowerCase().trim();
+    const type = filter.value;
+    const sortBy = sort.value;
+
+    const list = getItems().filter(item => {
+      const matchesType =
+        type === "all" || item.type === type;
+
+      const searchableText = [
+        item.name,
+        item.description,
+        item.place
+      ].join(" ").toLowerCase();
+
+      const matchesSearch =
+        !query || searchableText.includes(query);
+
+      return matchesType && matchesSearch;
+    });
+
+    list.sort((a, b) => {
+      if (sortBy === "name") {
+        return String(a.name || "").localeCompare(
+          String(b.name || ""),
+          undefined,
+          { sensitivity: "base" }
+        );
+      }
+
+      const timeA = Number(a.createdAt) || Date.parse(a.date) || 0;
+      const timeB = Number(b.createdAt) || Date.parse(b.date) || 0;
+
+      return sortBy === "oldest"
+        ? timeA - timeB
+        : timeB - timeA;
+    });
+
+    count.textContent =
+      `${list.length} report${list.length !== 1 ? "s" : ""} found`;
+
+    await renderList(list, grid);
   };
-  search.addEventListener("input",run);filter.addEventListener("change",run);
-  document.getElementById("clearFilters").addEventListener("click",()=>{search.value="";filter.value="all";run()});
+
+  search.addEventListener("input", run);
+  filter.addEventListener("change", run);
+  sort.addEventListener("change", run);
+
+  clear.addEventListener("click", () => {
+    search.value = "";
+    filter.value = "all";
+    sort.value = "newest";
+    run();
+  });
+
   run();
 }
+
+
 
 function initReport(){
   if(!requireUser())return;

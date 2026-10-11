@@ -22,21 +22,85 @@ faqItems.forEach((item) => {
   });
 });
 
+
 if (form) {
-  form.addEventListener('submit', (event) => {
+  const status = document.createElement("p");
+  status.id = "registration-status";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  form.appendChild(status);
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    status.textContent = "";
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-
-    if (!name || !email) {
-      alert('Please complete your details before registering.');
+    if (!form.checkValidity()) {
+      form.reportValidity();
       return;
     }
 
-    form.submit();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const role = document.getElementById("role").value || null;
+    const button = form.querySelector('button[type="submit"]');
+
+    button.disabled = true;
+    button.textContent = "Registering...";
+
+    try {
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/event_registrations`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            Prefer: "return=minimal"
+          },
+          body: JSON.stringify({
+            full_name: name,
+            email: email,
+            role: role
+          })
+        }
+      );
+
+      if (response.ok) {
+        status.textContent = "Registration successful!";
+        status.style.color = "green";
+        form.reset();
+        return;
+      }
+
+      let error = {};
+      try {
+        error = await response.json();
+      } catch {
+        // The server did not return a JSON error.
+      }
+
+      if (error.code === "23505") {
+        status.textContent = "This email is already registered.";
+      } else {
+        console.error("Registration failed:", error);
+        status.textContent =
+          "Registration failed. Please try again later.";
+      }
+
+      status.style.color = "red";
+    } catch (error) {
+      console.error("Registration request failed:", error);
+      status.textContent =
+        "Unable to connect. Check your internet and try again.";
+      status.style.color = "red";
+    } finally {
+      button.disabled = false;
+      button.textContent = "Register now";
+    }
   });
 }
+
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {

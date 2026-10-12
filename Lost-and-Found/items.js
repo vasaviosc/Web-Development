@@ -2,6 +2,14 @@ const ITEMS_KEY = "lf_items";
 const FILE_DB = "lf_file_store";
 const FILE_STORE = "files";
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const ALLOWED_FILE_TYPES = {
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".gif": "image/gif",
+  ".webp": "image/webp",
+  ".pdf": "application/pdf"
+};
 let objectUrls = [];
 
 const getItems = () => JSON.parse(localStorage.getItem(ITEMS_KEY) || "[]");
@@ -10,6 +18,27 @@ const user = () => JSON.parse(localStorage.getItem("lf_currentUser") || "null");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const fmt = d => d ? new Date(d + "T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}) : "—";
 const formatBytes = n => n < 1024 * 1024 ? `${Math.round(n / 1024)} KB` : `${(n / 1024 / 1024).toFixed(1)} MB`;
+const fileValidationError = async file => {
+  if(file.size>MAX_FILE_SIZE)return "File is too large. Please choose a file up to 10 MB.";
+  const extension=file.name.slice(file.name.lastIndexOf(".")).toLowerCase(),expectedType=ALLOWED_FILE_TYPES[extension];
+  if(!expectedType||(file.type&&file.type.toLowerCase()!==expectedType))return "Unsupported file type. Choose a JPEG, PNG, GIF, WebP, or PDF file.";
+  try{
+    const bytes=new Uint8Array(await file.slice(0,12).arrayBuffer());
+    const matches={
+      ".jpg":bytes[0]===0xff&&bytes[1]===0xd8&&bytes[2]===0xff,
+      ".jpeg":bytes[0]===0xff&&bytes[1]===0xd8&&bytes[2]===0xff,
+      ".png":[0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a].every((byte,index)=>bytes[index]===byte),
+      ".gif":String.fromCharCode(...bytes.slice(0,6))==="GIF87a"||String.fromCharCode(...bytes.slice(0,6))==="GIF89a",
+      ".webp":String.fromCharCode(...bytes.slice(0,4))==="RIFF"&&String.fromCharCode(...bytes.slice(8,12))==="WEBP",
+      ".pdf":String.fromCharCode(...bytes.slice(0,5))==="%PDF-"
+    };
+    if(!matches[extension])return "Unsupported file type. Choose a JPEG, PNG, GIF, WebP, or PDF file.";
+  }catch(error){
+    console.error("Could not read upload for file-type validation.",error);
+    return "Could not validate this file. Please choose another file.";
+  }
+  return "";
+};
 
 function requireUser(){
   if(!user()){ location.href="login.html"; return false; }
@@ -96,21 +125,41 @@ async function renderList(list,el){
 function initItems(){
   const grid=document.getElementById("itemsGrid");
   if(!grid)return;
-  const search=document.getElementById("searchInput"),filter=document.getElementById("typeFilter"),count=document.getElementById("itemsCount");
+  const search=document.getElementById("searchInput"),filter=document.getElementById("typeFilter"),statusFilter=document.getElementById("statusFilter"),dateFrom=document.getElementById("dateFromFilter"),dateTo=document.getElementById("dateToFilter"),sortBy=document.getElementById("sortBy"),count=document.getElementById("itemsCount");
   const run=async()=>{
-    const q=search.value.toLowerCase().trim(),t=filter.value;
-    const list=getItems().filter(i=>(t==="all"||i.type===t)&&(!q||`${i.name} ${i.description} ${i.place}`.toLowerCase().includes(q)));
+    const terms=search.value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim().split(/\s+/).filter(Boolean),t=filter.value,s=statusFilter.value,from=dateFrom.value,to=dateTo.value;
+    const getDateValue=value=>{
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(value||""))return null;
+      const timestamp=Date.parse(`${value}T00:00:00Z`);
+      return Number.isFinite(timestamp)&&new Date(timestamp).toISOString().slice(0,10)===value?timestamp:null;
+    };
+    const list=getItems().filter(i=>{
+      const text=`${i.name||""} ${i.description||""} ${i.place||""}`.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+      const date=i.date||"";
+      const validDate=getDateValue(date)!==null;
+      return (t==="all"||i.type===t)&&(s==="all"||i.status===s)&&terms.every(term=>text.includes(term))&&(!(from||to)||validDate)&&(!from||(validDate&&date>=from))&&(!to||(validDate&&date<=to));
+    });
+    list.sort((a,b)=>{
+      if(sortBy.value==="name-asc"||sortBy.value==="name-desc"){
+        const order=String(a.name||"").localeCompare(String(b.name||""),undefined,{sensitivity:"base"});
+        return sortBy.value==="name-asc"?order:-order;
+      }
+      const aDate=getDateValue(a.date),bDate=getDateValue(b.date);
+      if(aDate===null)return bDate===null?0:1;
+      if(bDate===null)return -1;
+      return sortBy.value==="oldest"?aDate-bDate:bDate-aDate;
+    });
     count.textContent=`${list.length} report${list.length!==1?"s":""}`;
     await renderList(list,grid);
   };
-  search.addEventListener("input",run);filter.addEventListener("change",run);
-  document.getElementById("clearFilters").addEventListener("click",()=>{search.value="";filter.value="all";run()});
+  search.addEventListener("input",run);filter.addEventListener("change",run);statusFilter.addEventListener("change",run);dateFrom.addEventListener("change",run);dateTo.addEventListener("change",run);sortBy.addEventListener("change",run);
+  document.getElementById("clearFilters").addEventListener("click",()=>{search.value="";filter.value="all";statusFilter.value="all";dateFrom.value="";dateTo.value="";sortBy.value="newest";run()});
   run();
 }
 
 function initReport(){
-  if(!requireUser())return;
   const form=document.getElementById("reportForm");if(!form)return;
+  if(!requireUser())return;
   const params=new URLSearchParams(location.search),editId=params.get("edit"),existing=editId?getItems().find(x=>x.id===editId&&x.reportedBy===user().email):null,type=(existing?existing.type:params.get("type")==="found"?"found":"lost");
   if(editId&&!existing){location.href="my-reports.html";return;}
   document.getElementById("reportTitle").textContent=existing?`Edit your ${type} report`:`Report a ${type} item`;
@@ -121,16 +170,19 @@ function initReport(){
   }
 
   const input=document.getElementById("itemImage");
-  input.addEventListener("change",e=>{
+  const preview=document.getElementById("imagePreview"),defaultPreview=preview.innerHTML;
+  input.addEventListener("change",async e=>{
     const f=e.target.files[0];
     const msg=document.getElementById("reportMessage");
     msg.textContent="";
     if(!f)return;
-    if(f.size>MAX_FILE_SIZE){e.target.value="";msg.textContent="File is too large. Please choose a file up to 10 MB.";return;}
-    document.getElementById("imagePreview").innerHTML=`<span class="upload-icon">${f.type.startsWith("image/")?"🖼":"📎"}</span><strong>${esc(f.name)}</strong><small>${esc(f.type||"File")} · ${esc(formatBytes(f.size))}</small>`;
+    const error=await fileValidationError(f);
+    if(input.files[0]!==f)return;
+    if(error){e.target.value="";preview.innerHTML=defaultPreview;msg.textContent=error;return;}
+    preview.innerHTML=`<span class="upload-icon">${f.type.startsWith("image/")?"🖼":"📎"}</span><strong>${esc(f.name)}</strong><small>${esc(f.type||"File")} · ${esc(formatBytes(f.size))}</small>`;
     if(f.type.startsWith("image/")){
       const r=new FileReader();
-      r.onload=()=>{document.getElementById("imagePreview").innerHTML=`<img src="${r.result}" alt="Preview"><small>${esc(f.name)} · ${esc(formatBytes(f.size))}</small>`};
+      r.onload=()=>{preview.innerHTML=`<img src="${r.result}" alt="Preview"><small>${esc(f.name)} · ${esc(formatBytes(f.size))}</small>`};
       r.readAsDataURL(f);
     }
   });
@@ -142,7 +194,11 @@ function initReport(){
     if(!itemName.value.trim()||!itemDescription.value.trim()||!itemDate.value||!itemPlace.value.trim()||!itemContact.value.trim()){
       msg.textContent="Please complete all required fields.";return;
     }
-    if(file&&file.size>MAX_FILE_SIZE){msg.textContent="File is too large. Maximum size is 10 MB.";return;}
+    if(file){
+      const error=await fileValidationError(file);
+      if(error){msg.textContent=error;return;}
+      if(input.files[0]!==file){msg.textContent="The selected file changed during validation. Please select it again.";return;}
+    }
     button.disabled=true;button.textContent="Publishing…";
     try{
       const id=existing?existing.id:(crypto.randomUUID?crypto.randomUUID():Date.now().toString());

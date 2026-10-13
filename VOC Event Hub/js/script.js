@@ -8,15 +8,20 @@ faqItems.forEach((item) => {
   const answer = item.querySelector('.faq-answer');
 
   trigger.addEventListener('click', () => {
-    const isOpen = item.classList.contains('active');
+    const shouldOpen = trigger.getAttribute('aria-expanded') !== 'true';
 
     faqItems.forEach((faqItem) => {
+      const faqButton = faqItem.querySelector('.faq-question');
+      const faqAnswer = faqItem.querySelector('.faq-answer');
+
       faqItem.classList.remove('active');
-      faqItem.querySelector('.faq-answer').hidden = true;
+      faqButton.setAttribute('aria-expanded', 'false');
+      faqAnswer.hidden = true;
     });
 
-    if (!isOpen) {
+    if (shouldOpen) {
       item.classList.add('active');
+      trigger.setAttribute('aria-expanded', 'true');
       answer.hidden = false;
     }
   });
@@ -26,38 +31,23 @@ if (form) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-
-    if (!name || !email) {
-      alert('Please complete your details before registering.');
+    if (!form.reportValidity()) {
       return;
     }
 
-    form.submit();
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('registration-message');
+
+    message.textContent = `Thanks, ${name}! Your registration details have been received.`;
+    form.reset();
   });
 }
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('is-open');
     const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+
+    navLinks.classList.toggle('is-open');
     navToggle.setAttribute('aria-expanded', String(!isExpanded));
   });
-}
-
-const registerButton = document.querySelector('.primary-btn');
-if (registerButton) {
-  registerButton.addEventListener('click', () => {
-    const activeButton = document.querySelector('.primary-btn.active');
-    if (activeButton) {
-      activeButton.classList.remove('active');
-    }
-    registerButton.classList.add('active');
-  });
-}
-
-const latestStats = document.querySelector('.faq-item .faq-answer');
-if (latestStats) {
-  latestStats.textContent = 'Seats are filling quickly for this year\'s workshop.';
 }

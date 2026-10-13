@@ -14,13 +14,18 @@
     <header class="site-header">
       <nav class="main-nav" aria-label="Main navigation">
         <a class="brand" href="#top">VOSC</a>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-links"
+        >
           Menu
         </button>
         <div class="nav-links" id="nav-links">
-          <a href="#schedul">Schedule</a>
-          <a href="#spekrs">Speakers</a>
-          <a href="#abut">About</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#speakers">Speakers</a>
+          <a href="#about">About</a>
           <a href="#faq">FAQ</a>
           <a href="#register">Register</a>
         </div>
@@ -37,7 +42,7 @@
             small-group exercises, and community learning.
           </p>
           <div class="hero-actions">
-            <a class="primary-btn" href="#abut">Learn More</a>
+            <a class="primary-btn" href="#about">Learn More</a>
             <a class="secondary-btn" href="#register">Reserve Your Spot</a>
           </div>
         </div>
@@ -105,31 +110,74 @@
         <h2>Frequently asked questions</h2>
         <div class="faq-list">
           <div class="faq-item active">
-            <div class="faq-question">Who should attend?</div>
-            <div class="faq-answer">This workshop is open to builders, researchers, designers, and curious learners across all experience levels.</div>
+            <h3>
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="true"
+                aria-controls="faq-answer-1"
+              >
+                Who should attend?
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-answer-1">
+              This workshop is open to builders, researchers, designers, and curious
+              learners across all experience levels.
+            </div>
           </div>
+
           <div class="faq-item">
-            <div class="faq-question">Do I need to bring my own laptop?</div>
-            <div class="faq-answer">Yes, a laptop is recommended so you can take part in the activities and prototyping sessions.</div>
+            <h3>
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-2"
+              >
+                Do I need to bring my own laptop?
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-answer-2" hidden>
+              Yes, a laptop is recommended so you can take part in the activities and
+              prototyping sessions.
+            </div>
           </div>
+
           <div class="faq-item">
-            <div class="faq-question">Is the event free?</div>
-            <div class="faq-answer">Yes, the workshop is free to attend for registered participants.</div>
+            <h3>
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-3"
+              >
+                Is the event free?
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-answer-3" hidden>
+              Yes, the workshop is free to attend for registered participants.
+            </div>
           </div>
         </div>
       </section>
 
       <section id="register" class="content-section registration-wrap">
-        <h4>Reserve your seat</h4>
-        <form id="register-form" class="register-form" novalidate>
+        <h2>Reserve your seat</h2>
+        <form id="register-form" class="register-form">
           <label for="name">Full name</label>
           <input id="name" name="name" type="text" placeholder="Your name" required />
 
           <label for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="name@company.com"
+            required
+          />
 
           <label for="role">Role</label>
-          <select id="role" name="role">
+          <select id="role" name="role" required>
             <option value="">Select a role</option>
             <option value="designer">Designer</option>
             <option value="developer">Developer</option>
@@ -138,6 +186,7 @@
           </select>
 
           <button type="submit" class="primary-btn">Register now</button>
+          <p id="registration-message" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>

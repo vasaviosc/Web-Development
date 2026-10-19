@@ -1,152 +1,370 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VOSC Event Hub</title>
-    <meta
-      name="description"
-      content="VOSC Event Hub brings developers, designers, and domain experts together for the Domain Discovery Workshop."
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="brand" href="#top">VOSC</a>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
-          Menu
-        </button>
-        <div class="nav-links" id="nav-links">
-          <a href="#schedul">Schedule</a>
-          <a href="#spekrs">Speakers</a>
-          <a href="#abut">About</a>
-          <a href="#faq">FAQ</a>
-          <a href="#register">Register</a>
-        </div>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1b">
+  <meta name="description" content="Discover the VOSC Event Hub — a community workshop connecting technology, domain knowledge, and creative problem-solving.">
+  <title>VOSC Event Hub | Discover. Build. Connect.</title>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Domain Discovery Workshop</p>
-          <h1>Build solutions with real domain context.</h1>
-          <p class="lead">
-            Explore practical AI, data, and product thinking through live sessions,
-            small-group exercises, and community learning.
-          </p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#abut">Learn More</a>
-            <a class="secondary-btn" href="#register">Reserve Your Spot</a>
-          </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="main-nav container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="VOSC Event Hub home">
+        <span class="brand-mark">V</span>
+        <span>VOSC<span class="brand-accent">.</span></span>
+      </a>
+
+      <button class="menu-toggle" type="button"
+        aria-expanded="false" aria-controls="nav-links">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="menu-label">Menu</span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#register">Join the event <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero container" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>
+          COMMUNITY • CREATIVITY • TECHNOLOGY
         </div>
 
-        <div class="hero-visual">
+        <h1>Ideas become<br> <span class="gradient-text">real-world</span><br>solutions.</h1>
+
+        <p class="hero-description">
+          Step beyond the code. Discover real problems, explore new domains,
+          and collaborate with fellow builders to turn ideas into meaningful experiences.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#register">
+            Reserve your spot <span aria-hidden="true">↗</span>
+          </a>
+          <a class="button button-secondary" href="#about">
+            Explore the event <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="hero-note">
+          <span class="note-icon" aria-hidden="true">✦</span>
+          <p>Curiosity is the starting point. Collaboration is the superpower.</p>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="art-glow" aria-hidden="true"></div>
+        <div class="hero-image-wrap">
           <img
-            src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80"
-            alt=""
-          />
+            src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1100&q=85"
+            alt="People collaborating at a community event"
+            fetchpriority="high">
+          <div class="image-overlay"></div>
+          <div class="image-caption">
+            <span class="caption-icon" aria-hidden="true">✳</span>
+            <div>
+              <strong>Think beyond boundaries.</strong>
+              <span>Learn together. Build together.</span>
+            </div>
+          </div>
         </div>
-      </section>
+        <div class="floating-tag tag-top"><span>✦</span> Discover</div>
+        <div class="floating-tag tag-bottom"><span>↗</span> Create impact</div>
+        <div class="art-orbit orbit-one" aria-hidden="true"></div>
+        <div class="art-orbit orbit-two" aria-hidden="true"></div>
+      </div>
+    </section>
 
-      <section id="about" class="content-section">
-        <h2>About the event</h2>
-        <p>
-          VOSC Event Hub is a community-driven workshop designed to help teams connect
-          technical ideas with the people, problems, and processes they serve.
-        </p>
-        <p>
-          Participants learn to uncover meaningful opportunities, validate assumptions,
-          and turn domain insight into useful digital experiences.
-        </p>
-      </section>
+    <section class="highlights container" aria-label="Event highlights">
+      <article class="highlight-item">
+        <span class="highlight-number">01</span>
+        <div><h2>Explore</h2><p>Understand real-world domains</p></div>
+      </article>
+      <article class="highlight-item">
+        <span class="highlight-number">02</span>
+        <div><h2>Collaborate</h2><p>Learn from diverse perspectives</p></div>
+      </article>
+      <article class="highlight-item">
+        <span class="highlight-number">03</span>
+        <div><h2>Create</h2><p>Turn ideas into prototypes</p></div>
+      </article>
+    </section>
 
-      <section id="schedule" class="content-section">
-        <h2>Schedule</h2>
-        <div class="schedule-grid">
-          <article class="schedule-card">
-            <span class="time">09:00</span>
-            <h3>Welcome and kickoff</h3>
-            <p>Set expectations and understand workshop goals.</p>
+    <section class="section container" id="about">
+      <div class="section-heading">
+        <p class="section-kicker">THE EXPERIENCE</p>
+        <h2>More than a workshop.<br><span class="gradient-text">A new way to think.</span></h2>
+        <p class="section-description">
+          Great solutions begin with understanding. This workshop helps you
+          connect technology with the people, problems, and processes it serves.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon icon-blue" aria-hidden="true">⌘</span>
+          <p class="card-index">01 / DISCOVER</p>
+          <h3>Understand the domain</h3>
+          <p>Explore the context behind real challenges and identify opportunities worth solving.</p>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+
+        <article class="feature-card feature-card-highlight">
+          <span class="feature-icon icon-purple" aria-hidden="true">✳</span>
+          <p class="card-index">02 / COLLABORATE</p>
+          <h3>Think in new directions</h3>
+          <p>Exchange perspectives, challenge assumptions, and learn through shared exploration.</p>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon icon-green" aria-hidden="true">⌁</span>
+          <p class="card-index">03 / BUILD</p>
+          <h3>Make ideas tangible</h3>
+          <p>Translate your insights into sketches, prototypes, and actionable next steps.</p>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section schedule-section" id="schedule">
+      <div class="container">
+        <div class="section-heading section-heading-row">
+          <div>
+            <p class="section-kicker">YOUR DAY, DESIGNED</p>
+            <h2>A journey from <span class="gradient-text">ideas to action.</span></h2>
+          </div>
+          <p class="section-description">
+            A sample agenda balancing discussion, discovery, and hands-on work.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-time"><span>09:00</span><span>AM</span></div>
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-label">KICKOFF</span>
+              <h3>Welcome &amp; orientation</h3>
+              <p>Set the stage, meet fellow participants, and understand the workshop goals.</p>
+            </div>
+            <span class="timeline-number" aria-hidden="true">01</span>
           </article>
-          <article class="schedule-card">
-            <span class="time">10:30</span>
-            <h3>Domain mapping</h3>
-            <p>Break down real challenges into opportunities.</p>
+
+          <article class="timeline-item">
+            <div class="timeline-time"><span>10:30</span><span>AM</span></div>
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-label">DISCOVERY</span>
+              <h3>Domain mapping</h3>
+              <p>Break down complex challenges, map stakeholders, and uncover meaningful opportunities.</p>
+            </div>
+            <span class="timeline-number" aria-hidden="true">02</span>
           </article>
-          <article class="schedule-card">
-            <span class="time">13:00</span>
-            <h3>Hands-on prototyping</h3>
-            <p>Turn ideas into experience sketches and working prototypes.</p>
+
+          <article class="timeline-item">
+            <div class="timeline-time"><span>01:00</span><span>PM</span></div>
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-label">HANDS-ON</span>
+              <h3>Prototyping &amp; sharing</h3>
+              <p>Shape ideas into early prototypes and share your team's learnings.</p>
+            </div>
+            <span class="timeline-number" aria-hidden="true">03</span>
           </article>
         </div>
-      </section>
+        <p class="sample-note">Agenda shown is illustrative. Confirm the official schedule before publishing.</p>
+      </div>
+    </section>
 
-      <section id="speakers" class="content-section">
-        <h2>Featured speakers</h2>
-        <div class="speaker-grid">
-          <article class="speaker-card">
+    <section class="section container" id="speakers">
+      <div class="section-heading">
+        <p class="section-kicker">LEARN FROM DIFFERENT PERSPECTIVES</p>
+        <h2>Meet the <span class="gradient-text">voices of discovery.</span></h2>
+        <p class="section-description">
+          Product thinking, engineering, and user research come together
+          to create a richer understanding of the problems we solve.
+        </p>
+      </div>
+
+      <div class="speaker-grid">
+        <article class="speaker-card">
+          <div class="speaker-avatar avatar-one" aria-hidden="true">AK</div>
+          <div class="speaker-info">
+            <span class="speaker-topic">PRODUCT STRATEGY</span>
             <h3>Aisha Khan</h3>
-            <p>Product strategist</p>
-          </article>
-          <article class="speaker-card">
+            <p>Exploring problems before building solutions.</p>
+          </div>
+          <span class="speaker-arrow" aria-hidden="true">↗</span>
+        </article>
+
+        <article class="speaker-card">
+          <div class="speaker-avatar avatar-two" aria-hidden="true">DO</div>
+          <div class="speaker-info">
+            <span class="speaker-topic">ENGINEERING</span>
             <h3>Daniel Ortiz</h3>
-            <p>AI engineering lead</p>
-          </article>
-          <article class="speaker-card">
+            <p>Connecting technical possibilities to practical needs.</p>
+          </div>
+          <span class="speaker-arrow" aria-hidden="true">↗</span>
+        </article>
+
+        <article class="speaker-card">
+          <div class="speaker-avatar avatar-three" aria-hidden="true">PN</div>
+          <div class="speaker-info">
+            <span class="speaker-topic">USER RESEARCH</span>
             <h3>Priya Nair</h3>
-            <p>UX researcher</p>
+            <p>Designing with people, not just for people.</p>
+          </div>
+          <span class="speaker-arrow" aria-hidden="true">↗</span>
+        </article>
+      </div>
+      <p class="sample-note">Speaker profiles are placeholders and should be verified before the event.</p>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <div class="container faq-layout">
+        <div class="section-heading">
+          <p class="section-kicker">GOOD TO KNOW</p>
+          <h2>Questions?<br><span class="gradient-text">We've got answers.</span></h2>
+          <p class="section-description">
+            A few helpful details to get you ready for the experience.
+          </p>
+          <a class="text-link" href="#register">Ready to join? <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3>
+              <button class="faq-question" type="button" aria-expanded="true"
+                aria-controls="faq-answer-1" id="faq-question-1">
+                Who should attend?
+                <span class="faq-plus" aria-hidden="true">−</span>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-answer-1"
+              role="region" aria-labelledby="faq-question-1">
+              <p>The workshop is intended for builders, researchers, designers, students, and curious learners of different experience levels.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3>
+              <button class="faq-question" type="button" aria-expanded="false"
+                aria-controls="faq-answer-2" id="faq-question-2">
+                Should I bring my laptop?
+                <span class="faq-plus" aria-hidden="true">+</span>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-answer-2" role="region"
+              aria-labelledby="faq-question-2" hidden>
+              <p>A laptop is recommended for hands-on activities and prototyping. Check the official event instructions for specific requirements.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3>
+              <button class="faq-question" type="button" aria-expanded="false"
+                aria-controls="faq-answer-3" id="faq-question-3">
+                Is registration free?
+                <span class="faq-plus" aria-hidden="true">+</span>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-answer-3" role="region"
+              aria-labelledby="faq-question-3" hidden>
+              <p>Please confirm the event's official registration terms before signing up.</p>
+            </div>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="faq" class="content-section">
-        <h2>Frequently asked questions</h2>
-        <div class="faq-list">
-          <div class="faq-item active">
-            <div class="faq-question">Who should attend?</div>
-            <div class="faq-answer">This workshop is open to builders, researchers, designers, and curious learners across all experience levels.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Do I need to bring my own laptop?</div>
-            <div class="faq-answer">Yes, a laptop is recommended so you can take part in the activities and prototyping sessions.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Is the event free?</div>
-            <div class="faq-answer">Yes, the workshop is free to attend for registered participants.</div>
+    <section class="section container" id="register">
+      <div class="registration-panel">
+        <div class="registration-copy">
+          <p class="section-kicker">YOUR NEXT CHAPTER STARTS HERE</p>
+          <h2>Bring your curiosity.<br><span class="gradient-text">Leave with possibilities.</span></h2>
+          <p>Interested in taking part? Fill in your details to begin the registration process.</p>
+          <div class="registration-note">
+            <span aria-hidden="true">ⓘ</span>
+            <span>This demo form does not submit or store registrations. Connect an approved registration service before collecting attendee details.</span>
           </div>
         </div>
-      </section>
 
-      <section id="register" class="content-section registration-wrap">
-        <h4>Reserve your seat</h4>
-        <form id="register-form" class="register-form" novalidate>
-          <label for="name">Full name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required />
+        <form id="register-form" class="register-form">
+          <div class="form-heading">
+            <h3>Express your interest</h3>
+            <p>Fields marked * are required.</p>
+          </div>
 
-          <label for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          <div class="form-field">
+            <label for="name">Full name <span aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" placeholder="e.g. Alex Johnson"
+              autocomplete="name" required minlength="2" maxlength="80">
+          </div>
 
-          <label for="role">Role</label>
-          <select id="role" name="role">
-            <option value="">Select a role</option>
-            <option value="designer">Designer</option>
-            <option value="developer">Developer</option>
-            <option value="researcher">Researcher</option>
-            <option value="student">Student</option>
-          </select>
+          <div class="form-field">
+            <label for="email">Email address <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" placeholder="you@example.com"
+              autocomplete="email" required maxlength="254">
+          </div>
 
-          <button type="submit" class="primary-btn">Register now</button>
+          <div class="form-field">
+            <label for="role">Your role</label>
+            <select id="role" name="role">
+              <option value="">Choose your role</option>
+              <option value="student">Student</option>
+              <option value="developer">Developer</option>
+              <option value="designer">Designer</option>
+              <option value="researcher">Researcher</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="button button-primary form-submit">
+            Validate details <span aria-hidden="true">→</span>
+          </button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <div class="site-footer">
-      <p>© 2026 VOSC Event Hub</p>
-      <a href="#top">Back to top</a>
+    <section class="closing-banner container" aria-label="Closing message">
+      <span class="closing-symbol" aria-hidden="true">✳</span>
+      <p>Stay curious. Ask better questions. Build things that matter.</p>
+      <a href="#home" aria-label="Back to top">↑</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#home">
+        <span class="brand-mark">V</span>
+        <span>VOSC<span class="brand-accent">.</span></span>
+      </a>
+      <p>Built for curious minds and collaborative builders.</p>
+      <a class="footer-top" href="#home">Back to top ↑</a>
+      <span class="copyright">© <span id="current-year">2026</span> VOSC Event Hub</span>
     </div>
-
-    <script src="js/script.js"></script>
-  </body>
+  </footer>
+</body>
 </html>
